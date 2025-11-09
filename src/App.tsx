@@ -3,9 +3,11 @@ import Login from "./pages/auth/Login";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignUp from "./pages/auth/Signup";
+import PrivateLayout from "./layouts/PrivateLayout";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 function App() {
-  const routes = createBrowserRouter([PublicRoute()]);
+  const routes = createBrowserRouter([PublicRoute(), PrivateRoute()]);
 
   return <RouterProvider router={routes} />;
 }
@@ -28,6 +30,19 @@ const PublicRoute = () => {
       {
         path: "/signup",
         element: <SignUp />,
+      },
+    ],
+  };
+};
+
+const PrivateRoute = () => {
+  return {
+    path: "/",
+    element: <PrivateLayout />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
       },
     ],
   };
